@@ -1,0 +1,125 @@
+<div class="bg-white p-5 rounded-2xl shadow-2xl w-full max-w-lg mx-auto mt-4">
+    <h2 class="text-center text-4xl font-semibold mb-8 text-[#242847]">
+        Add New Book
+    </h2>
+
+    <% if (typeof error !== 'undefined' && error) { %>
+    <div
+        class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4"
+    >
+        <%= error %>
+    </div>
+    <% } %> <% if (typeof success !== 'undefined' && success) { %>
+    <div
+        class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4"
+    >
+        <%= success %>
+    </div>
+    <% } %>
+
+    <form
+        action="/admin/books/create"
+        enctype="multipart/form-data"
+        method="POST"
+    >
+        <div class="mb-6">
+            <label for="title" class="block text-[#242847] mb-2"
+                >Book Title</label
+            >
+            <input
+                type="text"
+                id="title"
+                name="title"
+                required
+                max="255"
+                value="<%= typeof book !== 'undefined' && book.title ? book.title : '' %>"
+                class="w-full px-4 py-3 border border-[#242847] rounded-md focus:outline-none focus:ring-2 focus:ring-[#29C782]"
+            />
+        </div>
+
+        <div class="mb-6">
+            <label for="author" class="block text-[#242847] mb-2"
+                >Author(s)
+                <span
+                    class="h-2 w-2 rounded-full bg-black px-1 text-sm text-white cursor-pointer"
+                    title="Separate multiple authors with a comma"
+                    >?</span
+                >
+            </label>
+            <input
+                type="text"
+                id="author"
+                name="author"
+                required
+                value="<%= typeof book !== 'undefined' && book.author ? book.author : '' %>"
+                class="w-full px-4 py-3 border border-[#242847] rounded-md focus:outline-none focus:ring-2 focus:ring-[#29C782]"
+            />
+        </div>
+
+        <div class="mb-6">
+            <label for="description" class="block text-[#242847] mb-2"
+                >Description</label
+            >
+            <textarea
+                id="description"
+                name="description"
+                rows="4"
+                maxlength="500"
+                required
+                class="w-full px-4 py-3 border border-[#242847] rounded-md focus:outline-none focus:ring-2 focus:ring-[#29C782]"
+            >
+                <%= typeof book !== 'undefined' && book.description ? book.description : '' %>
+            </textarea>
+        </div>
+
+        <!-- Publication Date -->
+        <div class="mb-6">
+            <label for="publicationdate" class="block text-[#242847] mb-2"
+                >Publication Date</label
+            >
+            <input
+                type="date"
+                id="publicationdate"
+                name="publicationdate"
+                value="<%= typeof book !== 'undefined' && book.publicationdate ? book.publicationdate : '' %>"
+                class="w-full px-4 py-3 border border-[#242847] rounded-md focus:outline-none focus:ring-2 focus:ring-[#29C782]"
+            />
+        </div>
+
+        <!-- Number of Pages -->
+        <div class="mb-6">
+            <label for="pages" class="block text-[#242847] mb-2"
+                >Number of Pages</label
+            >
+            <input
+                type="number"
+                id="pages"
+                name="pages"
+                min="1"
+                value="<%= typeof book !== 'undefined' && book.pages ? book.pages : '' %>"
+                class="w-full px-4 py-3 border border-[#242847] rounded-md focus:outline-none focus:ring-2 focus:ring-[#29C782]"
+            />
+        </div>
+
+        <!-- Cover Image -->
+        <div class="mb-6">
+            <label for="coverImage" class="block text-[#242847] mb-2"
+                >Cover Image</label
+            >
+            <input
+                type="file"
+                id="coverImage"
+                name="coverImage"
+                accept="image/*"
+                class="w-full px-4 py-3 border border-[#242847] rounded-md focus:outline-none focus:ring-2 focus:ring-[#29C782]"
+            />
+        </div>
+
+        <button
+            type="submit"
+            class="w-full bg-[#29C782] text-white py-3 rounded-md hover:bg-[#242847] transition duration-300"
+        >
+            Add Book
+        </button>
+    </form>
+</div>
